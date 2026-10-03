@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interview Randomizer</title>
+</head>
+
+<body>
+
+    <h1>🎯 Interview Randomizer</h1>
+
+    <div>
+        <h2>{{ question.question }}</h2>
+
+        <p>
+            <strong>Category:</strong>
+            {{ question.category }}
+        </p>
+
+        <p>
+            <strong>Difficulty:</strong>
+            {{ question.difficulty }}
+        </p>
+    </div>
+
+    <br>
+
+    <a href="{% url 'random_question' %}">
+        <button>🎲 Give Me Another Question</button>
+    </a>
+
+</body>
+</html>
