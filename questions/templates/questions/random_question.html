@@ -1,32 +1,338 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Interview Randomizer</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .navbar {
+            background: #1f2937;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .navbar span {
+            color: #d1d5db;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #6b7280;
+        }
+
+        .filter-card,
+        .question-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .filter-card h3 {
+            margin-top: 0;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        button {
+            border: none;
+            border-radius: 7px;
+            padding: 11px 18px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .filter-button {
+            background: #2563eb;
+            color: white;
+            margin-top: 22px;
+        }
+
+        .filter-button:hover {
+            background: #1d4ed8;
+        }
+
+        .question-card h2 {
+            margin-top: 0;
+            line-height: 1.5;
+        }
+
+        .badges {
+            margin: 20px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #e5e7eb;
+            margin-right: 8px;
+            font-size: 13px;
+        }
+
+        details {
+            margin-top: 20px;
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .answer {
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .random-button {
+            display: block;
+            margin: 20px auto 0;
+            background: #111827;
+            color: white;
+        }
+
+        .random-button:hover {
+            background: #374151;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .container {
+                margin: 25px auto;
+            }
+
+            .filter-card,
+            .question-card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>🎯 Interview Randomizer</h1>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2>🎯 Interview Randomizer</h2>
+        <span>Practice. Prepare. Succeed.</span>
+    </nav>
 
-    <div>
-        <h2>{{ question.question }}</h2>
 
-        <p>
-            <strong>Category:</strong>
-            {{ question.category }}
-        </p>
+    <main class="container">
 
-        <p>
-            <strong>Difficulty:</strong>
-            {{ question.difficulty }}
-        </p>
-    </div>
+        <!-- Page Title -->
+        <div class="title">
+            <h1>Interview Practice</h1>
+            <p>Choose your category and difficulty level</p>
+        </div>
 
-    <br>
 
-    <a href="{% url 'random_question' %}">
-        <button>🎲 Give Me Another Question</button>
-    </a>
+        <!-- Filter Section -->
+        <div class="filter-card">
+
+            <h3>🎯 Choose Your Question</h3>
+
+            <form method="GET" action="{% url 'random_question' %}">
+
+                <div class="filter-row">
+
+                    <div class="filter-group">
+
+                        <label for="category">
+                            Category
+                        </label>
+
+                        <select name="category" id="category">
+
+                            <option value="">
+                                All Categories
+                            </option>
+
+                            <option value="Python"
+                                {% if selected_category == "Python" %}selected{% endif %}>
+                                Python
+                            </option>
+
+                            <option value="Django"
+                                {% if selected_category == "Django" %}selected{% endif %}>
+                                Django
+                            </option>
+
+                            <option value="SQL"
+                                {% if selected_category == "SQL" %}selected{% endif %}>
+                                SQL
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="difficulty">
+                            Difficulty
+                        </label>
+
+                        <select name="difficulty" id="difficulty">
+
+                            <option value="">
+                                All Difficulties
+                            </option>
+
+                            <option value="Easy"
+                                {% if selected_difficulty == "Easy" %}selected{% endif %}>
+                                Easy
+                            </option>
+
+                            <option value="Medium"
+                                {% if selected_difficulty == "Medium" %}selected{% endif %}>
+                                Medium
+                            </option>
+
+                            <option value="Hard"
+                                {% if selected_difficulty == "Hard" %}selected{% endif %}>
+                                Hard
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <button
+                            type="submit"
+                            class="filter-button">
+                            🎲 Get Question
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- Question Section -->
+        <div class="question-card">
+
+            <h2>
+                {{ question.question }}
+            </h2>
+
+
+            <div class="badges">
+
+                <span class="badge">
+                    📚 {{ question.category }}
+                </span>
+
+                <span class="badge">
+                    ⚡ {{ question.difficulty }}
+                </span>
+
+            </div>
+
+
+            <!-- Answer -->
+            <details>
+
+                <summary>
+                    👁️ Show Answer
+                </summary>
+
+                <div class="answer">
+
+                    <strong>Answer:</strong>
+
+                    <p>
+                        {{ question.answer }}
+                    </p>
+
+                </div>
+
+            </details>
+
+
+            <!-- Random Question -->
+            <a href="{% url 'random_question' %}">
+                <button class="random-button">
+                    🔄 Random Question
+                </button>
+            </a>
+
+        </div>
+
+    </main>
 
 </body>
 </html>

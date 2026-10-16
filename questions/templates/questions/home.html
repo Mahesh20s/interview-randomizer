@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interview Randomizer</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .navbar {
+            background: #1f2937;
+            color: white;
+            padding: 18px 40px;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .hero {
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .feature {
+            background: white;
+            padding: 25px;
+            width: 220px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature h3 {
+            margin-top: 10px;
+        }
+
+        .feature p {
+            font-size: 14px;
+        }
+
+        .start-button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .start-button:hover {
+            background: #1d4ed8;
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                margin: 50px auto;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h2>🎯 Interview Randomizer</h2>
+    </nav>
+
+
+    <section class="hero">
+
+        <h1>🎯 Ace Your Next Interview</h1>
+
+        <p>
+            Practice interview questions randomly based on
+            your preferred category and difficulty level.
+        </p>
+
+
+        <div class="features">
+
+            <div class="feature">
+                <div style="font-size: 35px;">🐍</div>
+
+                <h3>Python</h3>
+
+                <p>
+                    Practice Python interview questions.
+                </p>
+            </div>
+
+
+            <div class="feature">
+                <div style="font-size: 35px;">🌐</div>
+
+                <h3>Django</h3>
+
+                <p>
+                    Test your Django knowledge.
+                </p>
+            </div>
+
+
+            <div class="feature">
+                <div style="font-size: 35px;">🗄️</div>
+
+                <h3>SQL</h3>
+
+                <p>
+                    Improve your database skills.
+                </p>
+            </div>
+
+        </div>
+
+
+        <a href="{% url 'random_question' %}" class="start-button">
+            🚀 Start Interview Practice
+        </a>
+
+    </section>
+
+</body>
+
+</html>
